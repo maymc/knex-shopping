@@ -1,0 +1,6 @@
+version: '3'
+services:
+  my-app:
+    image: maymc/knex-shopping:${IMAGE_VERSION}
+    environment:
+      NODE_ENV: production
