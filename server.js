@@ -33,11 +33,39 @@ app.get('/users/:user_id', (req, res) => {
   console.log("id:", user_id);
   this.knex.raw(`SELECT * FROM users WHERE id = ${user_id}`)
     .then(results => {
-      console.log("user results:", results.rows[0]);
-      res.json(results.rows[0]);
+      if (results.rows[0] !== undefined) {
+        console.log("user results:", results.rows[0]);
+        res.json(results.rows[0]);
+      }
+      else {
+        res.json("User not found");
+      }
     })
     .catch(err => {
-      console.log('User not found', err);
+      console.log('GET user error', err);
+    })
+});
+
+app.post('/users/login', (req, res) => {
+  console.log("req.body:", req.body);
+  console.log("email:", req.body.email);
+  console.log("password:", req.body.password);
+
+  this.knex.raw(`SELECT * FROM users WHERE email = '${req.body.email}'`)
+    .then(results => {
+      console.log("\nresults:", results.rows[0]);
+      if (results.rows[0] === undefined) {
+        res.json("User not found");
+      }
+      else if (results.rows[0].password !== req.body.password) {
+        res.json("Incorrect password");
+      }
+      else {
+        res.json(results.rows[0]);
+      }
+    })
+    .catch(err => {
+      console.log("POST login error:", err);
     })
 });
 
