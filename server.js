@@ -1,5 +1,4 @@
 const express = require('express');
-const PORT = process.env.PORT || 8030;
 const app = express();
 const bodyParser = require('body-parser');
 
@@ -27,6 +26,6 @@ app.get('*', (req, res) => {
 
 
 
-app.listen(PORT, () => {
-  console.log(`Listening on port: ${PORT}`);
+app.listen(8030, () => {
+  console.log(`Listening on port 8030`);
 });

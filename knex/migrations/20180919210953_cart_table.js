@@ -1,5 +1,5 @@
 exports.up = function (knex, Promise) {
-  return knex.schema.createTable('products', function (table) {
+  return knex.schema.createTable('cart', function (table) {
     table.increments();
     table.integer('user_id').notNullable();
     table.integer('products_id').notNullable();
@@ -9,5 +9,5 @@ exports.up = function (knex, Promise) {
 }
 
 exports.down = function (knex, Promise) {
-  return knex.schema.dropTable('users');
+  return knex.schema.dropTable('cart');
 }
